@@ -1,0 +1,98 @@
+body {
+  background-color: rgb(52, 58, 64);
+  font-family: "Nixie One", cursive;
+  color: whitesmoke;
+  height: 100%;
+  cursor: pointer;
+}
+
+.bg {
+  background-image: url("/images/149357.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: scroll;
+}
+
+h1 {
+  color: gold;
+  font-family: "Megrim", cursive;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: center;
+  /* background-color: rgba(33, 37, 41, 0.8); */
+  padding: 15px;
+}
+
+h2 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  color: yellow;
+  text-align: center;
+  padding: 15px;
+}
+
+h4 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgb(137, 237, 255);
+}
+
+form {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+label {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.2rem;
+  color: darkgoldenrod;
+}
+
+#fillform {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 15px;
+}
+
+#block {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+}
+
+#block2 {
+  padding: 10px 10px;
+  justify-content: center;
+}
+
+#shapesList {
+  font-size: 20px;
+}
+
+#entry {
+  max-width: 100%;
+}
+
+#newtable {
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  max-width: 800px;
+}
+
+#sort {
+  max-width: 500px;
+}
+
+#new-table-header {
+  font-size: 17px;
+}
+
+@media (min-width: 768px) {
+  #newtable {
+    font-size: 15px;
+  }
+}
+
+.navbar {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
