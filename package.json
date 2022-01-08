@@ -1,24 +1,36 @@
 {
-  "name": "video-poker-swe1",
+  "name": "mood-app-bootcamp",
   "version": "1.0.0",
-  "description": "SWE1 Video Poker",
-  "main": "script.js",
+  "description": "# mood-app-bootcamp",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rocketacademy/video-poker-swe1.git"
+    "url": "git+https://github.com/EricFooSD/mood-app.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rocketacademy/video-poker-swe1/issues"
+    "url": "https://github.com/EricFooSD/mood-app.git/issues"
   },
-  "homepage": "https://github.com/rocketacademy/video-poker-swe1#readme",
+  "homepage": "https://github.com/EricFooSD/mood-app.git#readme",
   "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  },
+  "type": "module",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "eslint": "^7.32.0",
+    "express": "^4.17.1",
+    "jssha": "^3.2.0",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.1",
+    "pg": "^8.7.1"
   }
 }

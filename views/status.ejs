@@ -1,0 +1,71 @@
+<html>
+  <%- include('header',{title: `Your Status`}); -%>
+  <h1>Your Status</h1>
+  <br />
+  <div class="container">
+    <div class="row d-flex justify-content-center">Quote</div>
+    <br />
+    <div class="row d-flex justify-content-center">
+      <div class="col" id="sort">
+        <form id="sort">
+          <select class="form-select" name="sortby" id="sort-options">
+            <option selected>Sort by</option>
+            <option value="date">Date</option>
+          </select>
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark" input type="submit" id="sort-button">
+              Sort
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br />
+    <div class="row d-flex justify-content-center">
+      <div class="col" id="newtable">
+        <table
+          class="
+            table table-secondary table-striped table-hover table-sm
+            align-middle
+            table-responsive
+          "
+          style="text-align: center"
+        >
+          <thead class="table-dark" id="new-table-header">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Activity</th>
+              <th scope="col">Notes</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < activity.length; i+=1) { %>
+            <tr>
+              <td><%=activity[i].date%></td>
+              <td><%=activity[i].name%></td>
+              <td><%=activity[i].free_text%></td>
+              <td>
+                <form action="/edit/<%=activity[i].id %>" method="GET">
+                  <button type="submit" class="btn btn-outline-dark btn-sm">
+                    Edit
+                  </button>
+                </form>
+                <form
+                  action="/delete/<%= activity[i].id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button type="submit" class="btn btn-outline-dark btn-sm">
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }; %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <%- include('footer'); -%>
+</html>

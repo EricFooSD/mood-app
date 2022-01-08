@@ -1,0 +1,71 @@
+<html>
+  <%- include('header',{title: `New Mind`}); -%>
+  <h1>Quote</h1>
+  <div class="d-flex" id="block2">
+    <form action="/logEntry" method="POST">
+      <div class="container" id="block">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <label for="date">Date</label>
+            <div class="input-group mb-3">
+              <input type="date" class="form-control" id="entry" name="date" />
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <label for="type">Type</label>
+            <div class="input-group mb-3">
+              <% type.forEach((element) => { %>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="activity_type"
+                  id="inlineRadio1"
+                  value="<%= element.id %>"
+                />
+                <label class="form-check-label" for="inlineRadio1"
+                  ><%= element.name %></label
+                >
+              </div>
+              <% }); %>
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <label for="mood">Mood</label>
+            <div class="input-group mb-3">
+              <% mood.forEach((element) => { %>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="mood_id"
+                  id="inlineRadio1"
+                  value="<%= element.id %>"
+                />
+                <label class="form-check-label" for="inlineRadio1"
+                  ><%= element.name %></label
+                >
+              </div>
+              <% }); %>
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <label for="duration">Description</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="entry"
+                name="free_text"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 col-3">
+            <input type="submit" value="Submit" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <%- include('footer'); -%>
+</html>
