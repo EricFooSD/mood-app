@@ -8,10 +8,12 @@
     <div class="row d-flex justify-content-center">
       <div class="col" id="sort">
         <form id="sort">
-          <select class="form-select" name="sortby" id="sort-options">
-            <option selected>Sort by</option>
-            <option value="date">Date</option>
-          </select>
+          <input
+            class="form-control"
+            type="date"
+            name="sortby"
+            id="sort-options"
+          />
           <div class="d-grid gap-2">
             <button class="btn btn-dark" input type="submit" id="sort-button">
               Sort
@@ -24,11 +26,7 @@
     <div class="row d-flex justify-content-center">
       <div class="col" id="newtable">
         <table
-          class="
-            table table-secondary table-striped table-hover table-sm
-            align-middle
-            table-responsive
-          "
+          class="table table-secondary table-striped table-hover table-sm align-middle table-responsive"
           style="text-align: center"
         >
           <thead class="table-dark" id="new-table-header">
@@ -36,6 +34,7 @@
               <th scope="col">Date</th>
               <th scope="col">Activity</th>
               <th scope="col">Notes</th>
+              <th scope="col">Mood</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -45,12 +44,16 @@
               <td><%=activity[i].date%></td>
               <td><%=activity[i].name%></td>
               <td><%=activity[i].free_text%></td>
+              <td><%=activity[i].mood[0].name%></td>
               <td>
-                <form action="/edit/<%=activity[i].id %>" method="GET">
+                <div
+                  data-bs-toggle="modal"
+                  data-bs-target="#backdrop<%= activity[i].id %>"
+                >
                   <button type="submit" class="btn btn-outline-dark btn-sm">
-                    Edit
+                    Change
                   </button>
-                </form>
+                </div>
                 <form
                   action="/delete/<%= activity[i].id %>?_method=DELETE"
                   method="POST"
@@ -67,5 +70,108 @@
       </div>
     </div>
   </div>
+  <!-- Modal -->
+  <% for (let i = 0; i < activity.length; i+=1) { %>
+  <div
+    class="modal fade"
+    clear
+    id="backdrop<%= activity[i].id %>"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <form action="/edit/<%= activity[i].id %>" method="POST">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Name</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <label for="date">Date</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="entry"
+                      name="date"
+                      value="<%= activity[i].dataDate %>"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="type">Type</label>
+                  <div class="input-group mb-3">
+                    <% type.forEach((element) => { %>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox"
+                      name="activity_type" id="type" value="<%= element.id %>"
+                      <% if(element.id === activity[i].activity_type){ %>
+                      checked="checked" <%}%> />
+                      <label class="form-check-label" for="inlineRadio1"
+                        ><%= element.name %>
+                      </label>
+                    </div>
+                    <% }); %>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="duration">What did you do</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="entry"
+                      name="free_text"
+                      value="<%= activity[i].free_text %>"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="mood">How did you feel</label>
+                  <div class="input-group mb-3">
+                    <% mood.forEach((element) => { %>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox"
+                      name="mood_id" id="inlineRadio1" value="<%= element.id %>"
+                      <% for (let j=0; j < activity[i].mood.length; j +=1) { if
+                      (element.id === activity[i].mood[j].mood_id) { %>
+                      checked="checked" <%}}%> />
+                      <label class="form-check-label" for="inlineRadio1"
+                        ><%= element.name %>
+                      </label>
+                    </div>
+                    <% }); %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <% }; %>
+  <!-- Modal END -->
   <%- include('footer'); -%>
 </html>

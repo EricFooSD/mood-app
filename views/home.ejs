@@ -1,22 +1,35 @@
 <html>
   <%- include('header',{title: `Keeping Sane`}); -%>
-  <h1>Homepage</h1>
-  <div>
-    <h2>Daily Quote</h2>
-  </div>
-  <div>
-    <h2>Your Status</h2>
-  </div>
-  <div>
-    <h2>Log New</h2>
-  </div>
   <div class="container">
     <div class="row">
-      <div class="col" style="text-align: center">
-        <a href="/body">Body</a>
+      <div class="col-0 col-md-1"></div>
+      <div class="col-12 col-md-10">
+        <h1><%= id.quote %></h1>
       </div>
-      <div class="col" style="text-align: center">
-        <a href="/mind">Mind</a>
+      <div class="col-0 col-md-1"></div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="card text-white">
+            <a href="/body">
+              <img src="/images/body.jpg" class="card-img" />
+              <div href="/body" class="card-img-overlay">
+                <h5 class="card-title">Body</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <a href="/mind">
+            <div class="card text-white">
+              <img src="/images/mind.jpg" class="card-img" />
+              <div class="card-img-overlay">
+                <h5 class="card-title">Mind</h5>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

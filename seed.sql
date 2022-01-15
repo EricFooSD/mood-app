@@ -42,9 +42,10 @@ INSERT INTO quotes (quote, type) VALUES ('Just when the caterpillar thought the 
 
 -- Activity --
 
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2020-12-25', 1, 'Went for swim after a long day of work.');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2020-12-25', 10, 'Reading Harry Potter');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2020-12-26', 5, 'Did yoga with friends');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2021-12-25', 1, 'Went for swim after a long day of work.');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2021-12-25', 10, 'Reading Harry Potter');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2021-12-26', 5, 'Did yoga with friends');
+
 
 
 -- Activity_mood --

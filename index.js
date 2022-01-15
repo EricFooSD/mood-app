@@ -28,29 +28,71 @@ client.connect();
 
 const SALT = 'Eric testing the Hash';
 
+const tooltipTriggerList = () => { [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')); };
+
+const tooltipList = () => { tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)); };
+
+const getRandomInt = (max) => Math.floor(Math.random() * max);
+
 const homepage = (request, response) => {
   console.log('get: homepage');
-  response.render('home');
+  const sqlQuery = 'SELECT * FROM quotes';
+  let data;
+  client
+    .query(sqlQuery)
+    .then((result) => {
+      const quoteID = getRandomInt(result.rows.length);
+      data = { id: result.rows[quoteID] };
+      response.render('home', data);
+    });
 };
 
 const statusPage = (request, response) => {
   console.log('get: status page');
-  const sqlQuery = 'SELECT activity.id, activity.date, activity_type.name, activity.free_text, activity_type.category FROM activity INNER JOIN activity_type ON activity.activity_type = activity_type.id';
+  const sqlQuery = 'SELECT activity.id, activity.date, activity_type.name, activity.free_text, activity_type.category, activity.activity_type FROM activity INNER JOIN activity_type ON activity.activity_type = activity_type.id';
   client
     .query(sqlQuery)
     .then((result) => {
-      const activity = result.rows;
+      const activity = [];
       const selectedSort = request.query.sortby;
       console.log('sort by: ', request.query.sortby);
-      if (selectedSort === 'date') {
-        activity.sort((a, b) => ((a.date > b.date) ? 1 : -1));
-      }
-      for (let i = 0; i < activity.length; i += 1) {
-        activity[i].date = moment(activity[i].date).format('MMM Do YYYY');
+      for (let i = 0; i < result.rows.length; i += 1) {
+        result.rows[i].mood = [];
+        result.rows[i].dataDate = result.rows[i].date;
+        if (selectedSort == null) {
+          result.rows[i].date = moment(result.rows[i].date).format('MMM Do YYYY');
+          activity.push(result.rows[i]);
+        }
+        else if (result.rows[i].date === selectedSort) {
+          result.rows[i].date = moment(result.rows[i].date).format('MMM Do YYYY');
+          activity.push(result.rows[i]);
+        }
       }
       const data = { activity };
-      console.log('data', data);
-      response.render('status', data);
+      client
+        .query('SELECT * FROM mood')
+        .then((result2) => {
+          data.mood = result2.rows;
+          client
+            .query('SELECT * FROM activity_type')
+            .then((result3) => {
+              data.type = result3.rows;
+              client
+                .query('SELECT activity_mood.activity_id, activity_mood.mood_id, mood.name FROM activity_mood INNER JOIN mood ON activity_mood.mood_id = mood.id')
+                .then((result4) => {
+                  for (let i = 0; i < result4.rows.length; i += 1) {
+                    for (let j = 0; j < data.activity.length; j += 1) {
+                      if (data.activity[j].id === result4.rows[i].activity_id) {
+                        data.activity[j].mood.push(result4.rows[i]);
+                        break; }
+                      // console.log(`activity.id = ${j}`, data.activity[j].mood);
+                    }
+                  }
+                  // console.log('data', data);
+                  response.render('status', data);
+                });
+            });
+        });
     })
     .catch((error) => console.log(error.stack));
 };
@@ -66,7 +108,12 @@ const bodyPage = (request, response) => {
         .query('SELECT * FROM mood')
         .then((result2) => {
           data.mood = result2.rows;
-          response.render('body', data);
+          client
+            .query('SELECT * FROM quotes WHERE type = 1')
+            .then((result3) => {
+              data.quote = result3.rows[getRandomInt(result3.rows.length)];
+              response.render('body', data);
+            });
         });
     })
     .catch((error) => console.log(error.stack));
@@ -83,7 +130,12 @@ const mindPage = (request, response) => {
         .query('SELECT * FROM mood')
         .then((result2) => {
           data.mood = result2.rows;
-          response.render('mind', data);
+          client
+            .query('SELECT * FROM quotes WHERE type = 2')
+            .then((result3) => {
+              data.quote = result3.rows[getRandomInt(result3.rows.length)];
+              response.render('mind', data);
+            });
         });
     })
     .catch((error) => console.log(error.stack));
@@ -112,8 +164,8 @@ const logEntry = (request, reponse) => {
       return client.query(`INSERT INTO activity_mood (activity_id, mood_id) VALUES ${addQuery}`);
     })
     .then((result2) => {
-      console.log('Submitted Mind');
-      reponse.end('Submitted Mind');
+      console.log('Submitted');
+      reponse.end('Submitted');
     })
     .catch((error) => console.log(error.stack));
 };
@@ -126,7 +178,6 @@ const deleteEntry = (request, response) => {
   client
     .query(sqlQuery)
     .then((result) => {
-      console.log(result.rows);
       response.redirect('/status');
     })
     .catch((error) => console.log(error.stack));
@@ -163,10 +214,21 @@ const editPage = (request, response) => {
 };
 
 const editEntry = (request, response) => {
-  console.log('delete: remove entry');
   const selectedNote = request.params.id;
+  const data = request.body;
+  console.log(`edit: edit entry ${selectedNote}`);
+  console.log('data', data);
   console.log('selectedNote', selectedNote);
-  const sqlQuery = `DELETE FROM activity WHERE id=${selectedNote}; DELETE FROM activity_mood WHERE activity_id=${selectedNote}`;
+  let addQuery = '';
+  if (Array.isArray(data.mood_id)) {
+    data.mood_id.forEach((element) => {
+      addQuery += `(${selectedNote},${element}),`;
+    });
+    addQuery = addQuery.slice(0, -1); }
+  else {
+    addQuery = `(${selectedNote},${data.mood_id})`;
+  }
+  const sqlQuery = `UPDATE activity SET date='${data.date}', activity_type='${data.activity_type}', free_text='${data.free_text}' WHERE id=${selectedNote}; DELETE FROM activity_mood WHERE activity_id=${selectedNote}; INSERT INTO activity_mood (activity_id, mood_id) VALUES ${addQuery}`;
   client
     .query(sqlQuery)
     .then((result) => {
@@ -181,7 +243,7 @@ app.get('/status', statusPage);
 app.get('/body', bodyPage);
 app.get('/mind', mindPage);
 app.post('/logEntry', logEntry);
+app.post('/edit/:id', editEntry);
 app.delete('/delete/:id', deleteEntry);
-app.get('/edit/:id', editPage);
 
 app.listen(3004);
