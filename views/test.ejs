@@ -1,0 +1,146 @@
+<html>
+  <%- include('header',{title: `Sign up`}); -%>
+  <h1>Sign Up Form</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-0 col-md-2"></div>
+      <div class="col-12 col-md-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+         <li class="nav-item" role="presentation">
+        <button
+              class="nav-link active"
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Log In
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Sign Up
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <form action="/logIn" method="POST">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <label for="text">Name</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Password</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="password"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-3">
+                    <input type="submit" class="btn btn-dark" value="Submit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <form action="/createAccount" method="POST">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <label for="text">Name</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Age</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="age"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Gender</label>
+                    <select name="gender" class="form-control">
+                      <option selected>Please Select</option>
+                      <option value="He">He</option>
+                      <option value="She">She</option>
+                      <option value="Non-binary">Non-binary</option>
+                    </select>
+                  </br>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Password</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="password"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-3">
+                    <input type="submit" class="btn btn-dark" value="Submit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-0 col-md-2"></div>
+    </div>
+  </div>
+  <%- include('footer'); -%>
+</html>

@@ -1,0 +1,258 @@
+<html>
+  <%- include('header',{title: `Sign up`}); -%>
+  <h2>Log in into your account</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-0 col-md-2"></div>
+      <div class="col-12 col-md-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Log In
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Sign Up
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <form
+              action="/logIn"
+              class="needs-validation"
+              novalidate
+              method="POST"
+            >
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="entry"
+                      name="name" <% if (error==="WRONG_PASSWORD"){%>
+                      value='<%=name%>' <%}%> id="1234"
+                      placeholder="name@example.com" required />
+                      <label for="1234">Name</label>
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">Let us know your name.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <div class="form-floating mb-3">
+                      <input type="text" <%if (error==='WRONG_PASSWORD'){ %>
+                      class="form-control is-invalid" <% } else{ %>
+                      class="form-control" <%}%> id="entry" name="password"
+                      id="1234" placeholder="name@example.com" required />
+                      <label for="1234">Password</label>
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        We promise to keep it a secret.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <%if(error==='WRONG_PASSWORD'){%>
+                    <div
+                      class="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        style="display: none"
+                      >
+                        <symbol
+                          id="exclamation-triangle-fill"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                          />
+                        </symbol>
+                      </svg>
+                      <svg
+                        class="bi flex-shrink-0 me-2"
+                        width="24"
+                        height="24"
+                        role="img"
+                        aria-label="Danger:"
+                      >
+                        <use xlink:href="#exclamation-triangle-fill" />
+                      </svg>
+                      Please enter a valid username and password.
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <% } %> <%if(error==='NO_SUCH_USER'){%>
+                    <div
+                      class="alert alert-primary alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        style="display: none"
+                      >
+                        <symbol
+                          id="info-fill"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                          />
+                        </symbol>
+                      </svg>
+                      <svg
+                        class="bi flex-shrink-0 me-2"
+                        width="24"
+                        height="24"
+                        role="img"
+                        aria-label="Info:"
+                      >
+                        <use xlink:href="#info-fill" />
+                      </svg>
+                      Please register for an account.
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="col-md-3 col-3">
+                  <input type="submit" class="btn btn-dark" value="Submit" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <form
+              action="/createAccount"
+              class="needs-validation"
+              novalidate
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <br />
+                    <h3>Set up your account</h3>
+                    <br />
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Name</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="name"
+                        required
+                      />
+                      <div class="invalid-tooltip">Let us know your name.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Age</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="age"
+                        required
+                      />
+                      <div class="invalid-tooltip">Don't be shy now.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Gender</label>
+                    <select name="gender" class="form-control" required>
+                      <option selected disabled value="">Please Select</option>
+                      <option value="He">He</option>
+                      <option value="She">She</option>
+                      <option value="Non-binary">Non-binary</option>
+                    </select>
+                    <br />
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Password</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="entry"
+                        name="password"
+                        required
+                      />
+                      <div class="invalid-tooltip">
+                        We promise to keep it a secret.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <label for="text">Profile Picture</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="entry"
+                        name="photo"
+                        required
+                      />
+                      <div class="invalid-tooltip">Come on now.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-3">
+                    <input type="submit" class="btn btn-dark" value="Submit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-0 col-md-2"></div>
+    </div>
+  </div>
+  <%- include('footer'); -%>
+</html>

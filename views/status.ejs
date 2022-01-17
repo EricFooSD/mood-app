@@ -1,8 +1,17 @@
 <html>
   <%- include('header',{title: `Your Status`}); -%>
-  <h1>Your Status</h1>
-  <br />
   <div class="container">
+    <div class="row d-flex justify-content-center">
+      <h1>Hello, <%= profile.name %></h1>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <!-- <img
+        src="<%= profile.photo %>"
+        class="rounded-circle img-fluid"
+        height="20px"
+        width="20px"
+      /> -->
+    </div>
     <div class="row d-flex justify-content-center">Quote</div>
     <br />
     <div class="row d-flex justify-content-center">
@@ -16,7 +25,7 @@
           />
           <div class="d-grid gap-2">
             <button class="btn btn-dark" input type="submit" id="sort-button">
-              Sort
+              Select
             </button>
           </div>
         </form>
@@ -26,13 +35,13 @@
     <div class="row d-flex justify-content-center">
       <div class="col" id="newtable">
         <table
-          class="table table-secondary table-striped table-hover table-sm align-middle table-responsive"
+          class="table table-light table-striped table-hover table-sm align-middle table-responsive"
           style="text-align: center"
         >
           <thead class="table-dark" id="new-table-header">
             <tr>
               <th scope="col">Date</th>
-              <th scope="col">Activity</th>
+              <th scope="col"></th>
               <th scope="col">Notes</th>
               <th scope="col">Mood</th>
               <th scope="col"></th>
@@ -42,9 +51,14 @@
             <% for (let i = 0; i < activity.length; i+=1) { %>
             <tr>
               <td><%=activity[i].date%></td>
-              <td><%=activity[i].name%></td>
+              <td>
+                <i
+                  class="<%=activity[i].icon%>"
+                  title="<%=activity[i].name%>"
+                ></i>
+              </td>
               <td><%=activity[i].free_text%></td>
-              <td><%=activity[i].mood[0].name%></td>
+              <td><%=activity[i].moodNames%></td>
               <td>
                 <div
                   data-bs-toggle="modal"
@@ -86,7 +100,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Name</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Change</h5>
             <button
               type="button"
               class="btn-close"
@@ -114,11 +128,14 @@
                   <div class="input-group mb-3">
                     <% type.forEach((element) => { %>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox"
+                      <input class="form-check-input" type="radio"
                       name="activity_type" id="type" value="<%= element.id %>"
-                      <% if(element.id === activity[i].activity_type){ %>
-                      checked="checked" <%}%> />
-                      <label class="form-check-label" for="inlineRadio1"
+                      <% if (element.id === activity[i].activity_type){ %>
+                      checked<%}%> />
+                      <label
+                        id="label"
+                        class="form-check-label"
+                        for="inlineRadio1"
                         ><%= element.name %>
                       </label>
                     </div>
@@ -144,10 +161,13 @@
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="checkbox"
                       name="mood_id" id="inlineRadio1" value="<%= element.id %>"
-                      <% for (let j=0; j < activity[i].mood.length; j +=1) { if
-                      (element.id === activity[i].mood[j].mood_id) { %>
-                      checked="checked" <%}}%> />
-                      <label class="form-check-label" for="inlineRadio1"
+                      <% for (let j=0; j < activity[i].mood.length; j +=1){if
+                      (element.id === activity[i].mood[j].mood_id) { %> checked
+                      <%}}%> />
+                      <label
+                        id="label"
+                        class="form-check-label"
+                        for="inlineRadio1"
                         ><%= element.name %>
                       </label>
                     </div>
@@ -165,7 +185,7 @@
             >
               Close
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-success">Submit</button>
           </div>
         </div>
       </div>

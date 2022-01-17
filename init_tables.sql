@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS users (
   name TEXT,
   age INT,
   gender Text,
-  hashed_password TEXT
+  password TEXT,
+  hashed_password TEXT,
+  photo TEXT
 );
 
 CREATE TABLE IF NOT EXISTS activity (
@@ -17,7 +19,8 @@ CREATE TABLE IF NOT EXISTS activity (
 CREATE TABLE IF NOT EXISTS activity_type (
   id SERIAL PRIMARY KEY,
   name TEXT,
-  category INT
+  category INT,
+  icon TEXT
 );
 
 CREATE TABLE IF NOT EXISTS activity_mood (

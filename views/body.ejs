@@ -18,7 +18,9 @@
         >
           <img src="/images/<%= element.id %>.png" class="card-img" />
           <div class="card-img-overlay">
-            <h5 class="card-title"><%= element.name %></h5>
+            <h5 class="card-title position-absolute bottom-0">
+              <%= element.name %>
+            </h5>
           </div>
         </div>
       </div>
@@ -61,7 +63,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 visually-hidden">
                       <label for="type">Type</label>
                       <div class="input-group mb-3">
                         <input
@@ -71,6 +73,12 @@
                           name="activity_type"
                           value="<%= element.id %>"
                         />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="type">Icon</label>
+                      <div class="input-group mb-3">
+                        <i class="<%= element.icon%>"></i>
                       </div>
                     </div>
                     <div class="col-12">
@@ -114,12 +122,13 @@
                 >
                   Close
                 </button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
               </div>
             </div>
           </div>
         </form>
       </div>
+      <!-- Modal END -->
       <% }); %>
     </div>
   </div>
