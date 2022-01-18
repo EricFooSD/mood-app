@@ -11,9 +11,9 @@ INSERT INTO activity_type (name, category, icon) VALUES ('Bike', 1,'fas fa-bikin
 INSERT INTO activity_type (name, category, icon) VALUES ('Yoga', 1, 'fas fa-praying-hands');
 
 INSERT INTO activity_type (name, category, icon) VALUES ('Meditate', 2, 'fas fa-pray');
-INSERT INTO activity_type (name, category, icon) VALUES ('Daily Journal', 2, 'fas fa-pencil-alt');
+INSERT INTO activity_type (name, category, icon) VALUES ('Journal', 2, 'fas fa-pencil-alt');
 INSERT INTO activity_type (name, category, icon) VALUES ('Breathe', 2, 'fas fa-wind');
-INSERT INTO activity_type (name, category, icon) VALUES ('Reading', 2, 'fas fa-book-open');
+INSERT INTO activity_type (name, category, icon) VALUES ('Read', 2, 'fas fa-book-open');
 
 -- Mood --
 INSERT INTO mood (name, rating) VALUES ('Calm', 7);

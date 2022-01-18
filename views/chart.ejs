@@ -3,47 +3,188 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <div class="container">
     <div class="row">
-      <h1>Chart</h1>
+      <h1><%= profile.name %>'s Activity Chart</h1>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <form id="sort">
+        <input
+          class="form-control"
+          type="date"
+          name="sortby"
+          id="sort-options"
+        />
+        <div class="d-grid gap-2">
+          <button class="btn btn-dark" input type="submit" id="sort-button">
+            Select
+          </button>
+        </div>
+      </form>
     </div>
     <div class="row">
       <div class="col">
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart" width="200" height="200"></canvas>
+        <div style="display: none">
+          <img id="Swim" src="/images/1.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Run" src="/images/2.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Bike" src="/images/3.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Yoga" src="/images/4.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Meditate" src="/images/5.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Journal" src="/images/6.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Breathe" src="/images/7.svg" width="20" height="20" />
+        </div>
+        <div style="display: none">
+          <img id="Read" src="/images/8.svg" width="20" height="20" />
+        </div>
       </div>
 
       <script>
         const ctx = document.getElementById("myChart").getContext("2d");
+
+        const Swim = document.getElementById("Swim");
+        const Run = document.getElementById("Run");
+        const Bike = document.getElementById("Bike");
+        const Yoga = document.getElementById("Yoga");
+        const Meditate = document.getElementById("Meditate");
+        const Journal = document.getElementById("Journal");
+        const Breathe = document.getElementById("Breathe");
+        const Read = document.getElementById("Read");
+
+        const dates = "<%=labels%>";
+        const dateArray = dates.split(",");
+
+        const swim = "<%=Swim%>";
+        const SwimArray = swim.split(",");
+
+        const run = "<%=Run%>";
+        const RunArray = run.split(",");
+
+        const bike = "<%=Bike%>";
+        const BikeArray = bike.split(",");
+
+        const yoga = "<%=Yoga%>";
+        const YogaArray = yoga.split(",");
+
+        const meditate = "<%=Meditate%>";
+        const MeditateArray = meditate.split(",");
+
+        const breathe = "<%=Breathe%>";
+        const BreatheArray = breathe.split(",");
+
+        const journal = "<%=Journal%>";
+        const JournalArray = journal.split(",");
+
+        const read = "<%=Read%>";
+        const ReadArray = read.split(",");
+
         const myChart = new Chart(ctx, {
-          type: "bar",
+          type: "line",
           data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: dateArray,
             datasets: [
               {
-                label: "# of Votes",
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
-                ],
-                borderColor: [
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
-                ],
+                label: "Swim",
+                data: SwimArray,
+                pointStyle: [Swim, Swim, Swim, Swim, Swim, Swim],
+                backgroundColor: ["rgba(53,121,181,1)"],
                 borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Run",
+                data: RunArray,
+                pointStyle: [Run, Run, Run, Run, Run, Run],
+                backgroundColor: ["rgba(195,223,224,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Bike",
+                data: BikeArray,
+                pointStyle: [Bike, Bike, Bike, Bike, Bike, Bike],
+                backgroundColor: ["rgba(227,188,93,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Yoga",
+                data: YogaArray,
+                pointStyle: [Yoga, Yoga, Yoga, Yoga, Yoga, Yoga],
+                backgroundColor: ["rgba(233,175,163,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Meditate",
+                data: MeditateArray,
+                pointStyle: [
+                  Meditate,
+                  Meditate,
+                  Meditate,
+                  Meditate,
+                  Meditate,
+                  Meditate,
+                ],
+                backgroundColor: ["rgba(102,0,102,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Breathe",
+                data: BreatheArray,
+                pointStyle: [
+                  Breathe,
+                  Breathe,
+                  Breathe,
+                  Breathe,
+                  Breathe,
+                  Breathe,
+                ],
+                backgroundColor: ["rgba(204,102,51,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Journal",
+                data: JournalArray,
+                pointStyle: [
+                  Journal,
+                  Journal,
+                  Journal,
+                  Journal,
+                  Journal,
+                  Journal,
+                ],
+                backgroundColor: ["rgba(53,121,181,1)"],
+                borderWidth: 1,
+                showLine: false,
+              },
+              {
+                label: "Read",
+                data: ReadArray,
+                pointStyle: [Read, Read, Read, Read, Read, Read],
+                backgroundColor: ["rgba(140,155,136,1)"],
+                borderWidth: 1,
+                showLine: false,
               },
             ],
           },
           options: {
             scales: {
               y: {
-                beginAtZero: true,
+                min: 0.5,
+                suggestedMax: 18,
               },
             },
           },

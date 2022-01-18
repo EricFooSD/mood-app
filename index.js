@@ -11,6 +11,7 @@ import multer from 'multer';
 // .....................................
 // App set up
 // .....................................
+
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -30,12 +31,6 @@ const pgConnectionConfigs = {
 };
 const client = new Client(pgConnectionConfigs);
 client.connect();
-
-// .....................................
-// Global Variable
-// .....................................
-
-let data = {};
 
 // .....................................
 // User Auth
@@ -105,28 +100,36 @@ const restrictToLoggedIn = (request, response, next) => {
 // Functions
 // .....................................
 
+// >>>>>>> Helper functions >>>>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-const userInfo = (request, response, next) => {
+const getUserInfo = (cookies, data) => {
   console.log('get: userInfo');
-  data = {};
-  const { userID } = request.cookies;
+  const { userID } = cookies;
+  let profile;
   if (userID == null) {
-    data.profile = { photo: 'images/user-circle-solid.svg' };
+    profile = { photo: 'images/user-circle-solid.svg' };
+    data.profile = profile;
   }
   else {
     client
       .query(`SELECT * FROM users WHERE id=${userID}`)
-      .then((result2) => {
-        data.profile = result2.rows[0];
+      .then((result) => {
+        data.profile = result.rows[0];
       })
       .catch((error) => console.log(error.stack));
   }
-  next();
 };
+
+// >>>>>>> GET callback functions >>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 const homePage = (request, response) => {
   console.log('get: homepage');
+  const data = {};
+  getUserInfo(request.cookies, data);
   const sqlQuery = 'SELECT * FROM quotes';
   client
     .query(sqlQuery)
@@ -141,8 +144,9 @@ const homePage = (request, response) => {
 
 const statusPage = (request, response) => {
   console.log('get: status page');
+  const data = {};
+  getUserInfo(request.cookies, data);
   const user = request.cookies.userID;
-  console.log('user', user);
   const sqlQuery = `SELECT activity.id, activity.user_id, activity.date, activity_type.name, activity.free_text, activity_type.category, activity.activity_type, activity_type.icon FROM activity INNER JOIN activity_type ON activity.activity_type = activity_type.id WHERE activity.user_id=${user}`;
   client
     .query(sqlQuery)
@@ -197,6 +201,8 @@ const statusPage = (request, response) => {
 
 const bodyPage = (request, response) => {
   console.log('get: form body');
+  const data = {};
+  getUserInfo(request.cookies, data);
   client
     .query('SELECT * FROM activity_type WHERE category = 1')
     .then((result) => {
@@ -218,6 +224,8 @@ const bodyPage = (request, response) => {
 
 const mindPage = (request, response) => {
   console.log('get: form mind');
+  const data = {};
+  getUserInfo(request.cookies, data);
   client
     .query('SELECT * FROM activity_type WHERE category = 2')
     .then((result) => {
@@ -237,7 +245,112 @@ const mindPage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-const logEntry = (request, reponse) => {
+const logInPage = (request, response) => {
+  console.log('get: login page');
+  const data = {};
+  getUserInfo(request.cookies, data);
+  data.error = '';
+  if (request.isUserLoggedIn === true) {
+    response.redirect('/status');
+    return;
+  }
+  response.render('login', data);
+};
+
+const chartPage = (request, response) => {
+  console.log('get: chart');
+  const data = {};
+  getUserInfo(request.cookies, data);
+
+  const user = request.cookies.userID;
+
+  const selectedSort = request.query.sortby;
+  console.log('sort by: ', request.query.sortby);
+
+  let startDate;
+
+  if (selectedSort == null) {
+    startDate = moment().subtract(7, 'day');
+  } else {
+    startDate = moment(selectedSort);
+  }
+  console.log('startDate', startDate);
+
+  const weekly = (date) => {
+    const dates = [];
+    for (let i = 0; i < 7; i += 1) {
+      const newDate = (moment(date).add(i, 'day'));
+      dates.push(moment(newDate).format('MMM Do'));
+    }
+    return dates;
+  };
+
+  const selectedDates = weekly(startDate);
+  data.labels = selectedDates;
+
+  client
+    .query(`SELECT activity.id, activity.user_id, activity.date, activity.activity_type, activity_type.name FROM activity INNER JOIN activity_type ON activity.activity_type = activity_type.id WHERE user_id=${user}`)
+    .then((result) => {
+      result.rows.sort((a, b) => ((a.date > b.date) ? 1 : -1));
+      data.activity = result.rows;
+      data.activity.forEach((element) => {
+        element.chartDate = moment(element.date).format('MMM Do');
+        element.score = 0;
+      });
+      client
+        .query('SELECT activity_mood.activity_id, activity_mood.mood_id, mood.rating FROM activity_mood INNER JOIN mood ON activity_mood.mood_id = mood.id')
+        .then((result2) => {
+          result2.rows.forEach((element) => {
+            for (let j = 0; j < data.activity.length; j += 1) {
+              if (element.activity_id === data.activity[j].id) { data.activity[j].score += element.rating;
+                break;
+              }
+            }
+          });
+          client
+            .query('SELECT * FROM activity_type')
+            .then((result3) => {
+              result3.rows.forEach((element) => {
+                console.log('element.name', element.name);
+                data[`${element.name}`] = [0, 0, 0, 0, 0, 0, 0];
+
+                for (let j = 0; j < data.labels.length; j += 1) {
+                  for (let k = 0; k < data.activity.length; k += 1) {
+                    if (data.activity[k].chartDate === data.labels[j] && data.activity[k].name === element.name) {
+                      data[`${element.name}`][j] += data.activity[k].score;
+                    }
+                  }
+                }
+              });
+              console.log('data', data);
+              response.render('chart', data);
+            });
+        });
+    })
+    .catch((error) => console.log(error.stack));
+};
+
+const profilePage = (request, response) => {
+  console.log('get: profile page');
+  const data = {};
+  getUserInfo(request.cookies, data);
+
+  const sqlQuery = 'SELECT * FROM quotes';
+  client
+    .query(sqlQuery)
+    .then((result) => {
+      const quoteID = getRandomInt(result.rows.length);
+      data.id = result.rows[quoteID];
+      console.log('data', data);
+      response.render('profile', data);
+    })
+    .catch((error) => console.log(error.stack));
+};
+
+// >>>>>>> POST callback functions >>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+const logEntry = (request, response) => {
   console.log('post: note submitted');
   console.log(request.body);
   const log = request.body;
@@ -261,7 +374,7 @@ const logEntry = (request, reponse) => {
     })
     .then((result2) => {
       console.log('Submitted');
-      reponse.end('Submitted');
+      response.redirect('/status');
     })
     .catch((error) => console.log(error.stack));
 };
@@ -304,18 +417,9 @@ const editEntry = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-const logInPage = (request, response) => {
-  console.log('get: login page');
-  console.log('request.isUserLoggedIn', request.isUserLoggedIn);
-  data.error = '';
-  if (request.isUserLoggedIn === true) {
-    response.redirect('/status');
-    return;
-  }
-  response.render('login', data);
-};
-
 const createUser = (request, response) => {
+  const data = {};
+  getUserInfo(request.cookies, data);
   console.log('post: Create User');
   const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
   shaObj.update(request.body.password);
@@ -334,6 +438,8 @@ const createUser = (request, response) => {
 
 const logIn = (request, response) => {
   console.log('login attempted');
+  const data = {};
+  getUserInfo(request.cookies, data);
   const values = [request.body.name];
   client
     .query('SELECT * from users WHERE name=$1', values)
@@ -365,7 +471,6 @@ const logIn = (request, response) => {
       const hashedCookieString = shaObj2.getHash('HEX');
       response.cookie('loggedInHash', hashedCookieString);
       response.cookie('userID', `${user.id}`);
-      response.cookie('photo', result.rows[0].photo);
       response.redirect('/status');
     })
     .catch((error) => console.log(error.stack));
@@ -378,16 +483,20 @@ const signOut = (request, response) => {
   response.redirect('/login');
 };
 
-const chartPage = (request, response) => {
-  console.log('get: homepage');
-  const sqlQuery = 'SELECT * FROM quotes';
+const editProfile = (request, response) => {
+  const edit = request.body;
+  console.log('edit', edit);
+
+  const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  shaObj.update(edit.password);
+  const hashedPassword = shaObj.getHash('HEX');
+
+  const sqlQuery = `UPDATE users SET name='${edit.name}', age='${edit.age}', gender='${edit.gender}', password='${edit.password}', hashed_password='${hashedPassword}', photo='${request.file.filename}' WHERE id=${edit.id}`;
   client
     .query(sqlQuery)
     .then((result) => {
-      const quoteID = getRandomInt(result.rows.length);
-      data.id = result.rows[quoteID];
-      console.log('data', data);
-      response.render('chart', data);
+      console.log(result.rows);
+      response.redirect('/profile');
     })
     .catch((error) => console.log(error.stack));
 };
@@ -397,17 +506,19 @@ const chartPage = (request, response) => {
 // .....................................
 
 // get
-app.get('/', userInfo, homePage);
-app.get('/status', restrictToLoggedIn, userInfo, statusPage);
-app.get('/body', restrictToLoggedIn, userInfo, bodyPage);
-app.get('/mind', restrictToLoggedIn, userInfo, mindPage);
-app.get('/login', userInfo, logInPage);
-app.get('/signout', restrictToLoggedIn, userInfo, signOut);
-app.get('/chart', restrictToLoggedIn, userInfo, chartPage);
+app.get('/', homePage);
+app.get('/status', restrictToLoggedIn, statusPage);
+app.get('/body', restrictToLoggedIn, bodyPage);
+app.get('/mind', restrictToLoggedIn, mindPage);
+app.get('/login', logInPage);
+app.get('/signout', restrictToLoggedIn, signOut);
+app.get('/profile', restrictToLoggedIn, profilePage);
+app.get('/chart', restrictToLoggedIn, chartPage);
 
 // post
 app.post('/logEntry', restrictToLoggedIn, logEntry);
 app.post('/edit/:id', restrictToLoggedIn, editEntry);
+app.post('/editProfile', restrictToLoggedIn, multerUpload.single('photo'), editProfile);
 app.post('/createAccount', multerUpload.single('photo'), createUser);
 app.post('/logIn', logIn);
 
