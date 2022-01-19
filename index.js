@@ -7,6 +7,8 @@ import moment from 'moment';
 import pg from 'pg';
 import jsSHA from 'jssha';
 import multer from 'multer';
+import aws from 'aws-sdk';
+import multerS3 from 'multer-s3';
 
 // .....................................
 // App set up
@@ -20,7 +22,24 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));
 moment().format();
-const multerUpload = multer({ dest: 'uploads/' });
+const s3 = new aws.S3({
+  accessKeyId: process.env.ACCESSKEYID,
+  secretAccessKey: process.env.SECRETACCESSKEY,
+});
+
+const multerUpload = multer({
+  storage: multerS3({
+    s3,
+    bucket: 'moodbucket',
+    acl: 'public-read',
+    metadata: (request, file, callback) => {
+      callback(null, { fieldName: file.fieldname });
+    },
+    key: (request, file, callback) => {
+      callback(null, Date.now().toString());
+    },
+  }),
+});
 
 const { Client } = pg;
 
@@ -48,6 +67,7 @@ const client = new Client(pgConnectionConfigs);
 client.connect();
 
 const PORT = process.env.PORT || 3004;
+
 // .....................................
 // User Auth
 // .....................................
