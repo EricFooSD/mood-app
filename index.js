@@ -32,6 +32,7 @@ const pgConnectionConfigs = {
 const client = new Client(pgConnectionConfigs);
 client.connect();
 
+const PORT = process.env.PORT || 3004;
 // .....................................
 // User Auth
 // .....................................
@@ -526,4 +527,4 @@ app.post('/logIn', logIn);
 // delete
 app.delete('/delete/:id', restrictToLoggedIn, deleteEntry);
 
-app.listen(3004);
+app.listen(PORT);
