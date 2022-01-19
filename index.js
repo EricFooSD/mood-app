@@ -23,12 +23,27 @@ moment().format();
 const multerUpload = multer({ dest: 'uploads/' });
 
 const { Client } = pg;
-const pgConnectionConfigs = {
-  user: 'Eric',
-  host: 'localhost',
-  database: 'moodfulness',
-  port: 5432, // Postgres server always runs on this port
-};
+
+let pgConnectionConfigs;
+
+if (process.env.DATABASE_URL) {
+  // pg will take in the entire value and use it to connect
+  pgConnectionConfigs = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+} else {
+  // this is the same value as before
+  pgConnectionConfigs = {
+    user: 'Eric',
+    host: 'localhost',
+    database: 'moodfulness',
+    port: 5432, // Postgres server always runs on this port
+  };
+}
+
 const client = new Client(pgConnectionConfigs);
 client.connect();
 
