@@ -3,7 +3,10 @@
   <div class="container">
     <div class="row">
       <div class="col-0 col-md-1"></div>
-      <div class="col-12 col-md-10">
+      <div
+        class="col-12 col-md-10 d-flex align-items-center justify-content-center"
+        id="quote"
+      >
         <h1><%= quote.quote %></h1>
       </div>
       <div class="col-0 col-md-1"></div>
@@ -35,7 +38,13 @@
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <form action="/logEntry" method="POST">
+        <form
+          action="/logEntry"
+          class="needs-validation"
+          id="checkboxform"
+          novalidate
+          method="POST"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -60,6 +69,7 @@
                           class="form-control"
                           id="entry"
                           name="date"
+                          required
                         />
                       </div>
                     </div>
@@ -82,18 +92,20 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <label for="duration">How were you feeling</label>
+                      <label for="duration">What did you do</label>
                       <div class="input-group mb-3">
                         <input
                           type="text"
                           class="form-control"
                           id="entry"
                           name="free_text"
+                          required
                         />
                       </div>
                     </div>
                     <div class="col-12">
-                      <label for="mood">How did you feel</label>
+                      <label for="mood">How were you feeling</label><br />
+                      <label for="mood">(Select at least 1)</label>
                       <div class="input-group mb-3">
                         <% mood.forEach((element) => { %>
                         <div class="form-check form-check-inline">
@@ -102,6 +114,7 @@
                             type="checkbox"
                             name="mood_id"
                             id="inlineRadio1"
+                            id="checkboxLabel"
                             value="<%= element.id %>"
                           />
                           <label class="form-check-label" for="inlineRadio1"

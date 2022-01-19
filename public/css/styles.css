@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-  color: #424642;
+  color: #000957;
   font-family: "Covered By Your Grace", cursive;
   font-size: 35px;
   text-align: center;
@@ -39,6 +39,35 @@ h4 {
 
 h5 {
   color: whitesmoke;
+  font-family: "Rubik", sans-serif;
+}
+
+label {
+  font-size: 1rem;
+  color: #123054;
+  font-weight: bold;
+}
+
+#checkboxLabel {
+  font-size: 1rem;
+  color: #2e4396;
+  font-weight: 500;
+}
+
+#quote {
+  height: 35vh;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  #quote {
+    height: 25vh;
+    text-align: center;
+  }
+}
+
+#homeCard {
+  width: 80vw;
 }
 
 @media (min-width: 768px) {
@@ -54,11 +83,6 @@ h5 {
 form {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-}
-
-label {
-  font-size: 1rem;
-  color: #541212;
 }
 
 #newtable {

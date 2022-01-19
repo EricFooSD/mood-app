@@ -353,6 +353,7 @@ const profilePage = (request, response) => {
 const logEntry = (request, response) => {
   console.log('post: note submitted');
   console.log(request.body);
+
   const log = request.body;
   const { userID } = request.cookies;
   let addQuery = '';

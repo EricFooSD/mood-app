@@ -29,10 +29,10 @@ INSERT INTO mood (name, rating) VALUES ('Hopeless', 1);
 
 
 -- Quotes. 1 is physical, 2 is mental--
-INSERT INTO quotes (quote, type) VALUES ('The only bad workout is the one that did not happen.', 1);
+INSERT INTO quotes (quote, type) VALUES ('Self-care is giving the world the best of you, instead of what''s left of you.', 1);
 INSERT INTO quotes (quote, type) VALUES ('The body achieves what the mind believes.', 1);
 INSERT INTO quotes (quote, type) VALUES ('Take care of your body. It''s the only place you have to live in.', 1);
-INSERT INTO quotes (quote, type) VALUES ('Every workout counts even if it''s only for 15 minutes. Just do it.', 1);
+INSERT INTO quotes (quote, type) VALUES ('Exercise not only changes your body. It changes your mind, your attitude and your mood.', 1);
 
 INSERT INTO quotes (quote, type) VALUES ('There is a crack in everything, that''s how the light gets in.', 2);
 INSERT INTO quotes (quote, type) VALUES ('Happiness can be found even in the darkest of times, if one only remembers to turn on the light.', 2);
