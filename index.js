@@ -465,6 +465,8 @@ const createUser = (request, response) => {
   shaObj.update(request.body.password);
   const hashedPassword = shaObj.getHash('HEX');
 
+  console.log('request.file', request.file);
+
   const values = [request.body.name, request.body.age, request.body.gender, request.body.password, hashedPassword, request.file.fieldname];
   const sqlQuery = 'INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ($1,$2,$3,$4,$5,$6)';
   client
