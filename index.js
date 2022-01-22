@@ -199,11 +199,11 @@ const statusPage = (request, response) => {
         result.rows[i].moodNames = '';
         result.rows[i].dataDate = result.rows[i].date;
         if (selectedSort == null) {
-          result.rows[i].date = moment(result.rows[i].date).format('MMM Do YYYY');
+          result.rows[i].date = moment(result.rows[i].date).format('Do MMM YYYY');
           activity.push(result.rows[i]);
         }
         else if (result.rows[i].date === selectedSort) {
-          result.rows[i].date = moment(result.rows[i].date).format('MMM Do YYYY');
+          result.rows[i].date = moment(result.rows[i].date).format('Do MMM YYYY');
           activity.push(result.rows[i]);
         }
       }
