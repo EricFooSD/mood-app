@@ -49,7 +49,7 @@ if (process.env.DATABASE_URL) {
       bucket: 'moodbucket',
       acl: 'public-read',
       metadata: (request, file, callback) => {
-        callback(null, { filename: file.filename });
+        callback(null, { fieldname: file.filename });
       },
       key: (request, file, callback) => {
         callback(null, Date.now().toString());
@@ -149,7 +149,7 @@ const getUserInfo = (cookies, data) => {
   const { userID } = cookies;
   let profile;
   if (userID == null) {
-    profile = { photo: 'images/user-circle-solid.svg' };
+    profile = { photo: 'user-circle-solid.svg' };
     data.profile = profile;
   }
   else {
