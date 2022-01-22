@@ -49,7 +49,7 @@ if (process.env.DATABASE_URL) {
       bucket: 'moodbucket',
       acl: 'public-read',
       metadata: (request, file, callback) => {
-        callback(null, { fieldname: file.filename });
+        callback(null, { fieldname: file.fieldname });
       },
       key: (request, file, callback) => {
         callback(null, Date.now().toString());
