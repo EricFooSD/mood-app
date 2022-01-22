@@ -465,7 +465,7 @@ const createUser = (request, response) => {
   shaObj.update(request.body.password);
   const hashedPassword = shaObj.getHash('HEX');
 
-  const values = [request.body.name, request.body.age, request.body.gender, request.body.password, hashedPassword, request.file.filename];
+  const values = [request.body.name, request.body.age, request.body.gender, request.body.password, hashedPassword, request.file.fieldname];
   const sqlQuery = 'INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ($1,$2,$3,$4,$5,$6)';
   client
     .query(sqlQuery, values)
@@ -531,7 +531,7 @@ const editProfile = (request, response) => {
   shaObj.update(edit.password);
   const hashedPassword = shaObj.getHash('HEX');
 
-  const sqlQuery = `UPDATE users SET name='${edit.name}', age='${edit.age}', gender='${edit.gender}', password='${edit.password}', hashed_password='${hashedPassword}', photo='${request.file.filename}' WHERE id=${edit.id}`;
+  const sqlQuery = `UPDATE users SET name='${edit.name}', age='${edit.age}', gender='${edit.gender}', password='${edit.password}', hashed_password='${hashedPassword}', photo='${request.file.fieldname}' WHERE id=${edit.id}`;
   client
     .query(sqlQuery)
     .then((result) => {
