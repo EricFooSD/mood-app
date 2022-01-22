@@ -22,24 +22,13 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));
 moment().format();
+
 const s3 = new aws.S3({
   accessKeyId: process.env.ACCESSKEYID,
   secretAccessKey: process.env.SECRETACCESSKEY,
 });
 
-const multerUpload = multer({
-  storage: multerS3({
-    s3,
-    bucket: 'moodbucket',
-    acl: 'public-read',
-    metadata: (request, file, callback) => {
-      callback(null, { fieldName: file.fieldname });
-    },
-    key: (request, file, callback) => {
-      callback(null, Date.now().toString());
-    },
-  }),
-});
+let multerUpload = multer({ dest: 'uploads/' });
 
 const { Client } = pg;
 
@@ -53,6 +42,20 @@ if (process.env.DATABASE_URL) {
       rejectUnauthorized: false,
     },
   };
+
+  multerUpload = multer({
+    storage: multerS3({
+      s3,
+      bucket: 'moodbucket',
+      acl: 'public-read',
+      metadata: (request, file, callback) => {
+        callback(null, { fieldName: file.fieldname });
+      },
+      key: (request, file, callback) => {
+        callback(null, Date.now().toString());
+      },
+    }),
+  });
 } else {
   // this is the same value as before
   pgConnectionConfigs = {
