@@ -6,3 +6,6 @@ node_modules/
 
 # File uploads
 uploads/*
+
+# File uploads
+setupfiles/post-mortem.pages
