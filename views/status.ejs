@@ -1,6 +1,7 @@
 <html>
   <%- include('header',{title: `Your Status`}); -%>
   <div class="container">
+    <!-- Welcome message and profile photo -->
     <div class="row d-flex justify-content-center">
       <h1>Hello, <%= profile.name %></h1>
     </div>
@@ -12,6 +13,7 @@
       />
     </div>
     <br />
+    <!-- Filter activities by date -->
     <div class="row d-flex justify-content-center">
       <div class="col" id="sort">
         <form id="sort">
@@ -30,6 +32,7 @@
       </div>
     </div>
     <br />
+    <!-- Main table element to list all activities logged -->
     <div class="row d-flex justify-content-center">
       <div class="col" id="newtable">
         <table
@@ -82,6 +85,7 @@
       </div>
     </div>
   </div>
+  <!-- Modal to edit an existing logged activity -->
   <!-- Modal -->
   <% for (let i = 0; i < activity.length; i+=1) { %>
   <div
