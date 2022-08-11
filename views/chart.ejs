@@ -5,7 +5,6 @@
     <div class="row">
       <h1><%= profile.name %>'s Activity Chart</h1>
     </div>
-    <!-- Create select date element -->
     <div class="row d-flex justify-content-center">
       <form id="sort">
         <input
@@ -21,12 +20,9 @@
         </div>
       </form>
     </div>
-
-    <!-- Create the canvas div for script to render Chart.js chart -->
     <div class="row">
       <div class="col">
         <canvas id="myChart" width="200" height="200"></canvas>
-        <!-- Define the icons to be used in chart -->
         <div style="display: none">
           <img id="Swim" src="/images/1.svg" width="20" height="20" />
         </div>
@@ -54,10 +50,8 @@
       </div>
 
       <script>
-        // .... get HTML elements to populate chart .... //
         const ctx = document.getElementById("myChart").getContext("2d");
 
-        // .... get HTML elements for icons .... //
         const Swim = document.getElementById("Swim");
         const Run = document.getElementById("Run");
         const Bike = document.getElementById("Bike");
@@ -67,7 +61,6 @@
         const Breathe = document.getElementById("Breathe");
         const Read = document.getElementById("Read");
 
-        // .... prepare data to be populated into chart .... //
         const dates = "<%=labels%>";
         const dateArray = dates.split(",");
 
@@ -95,7 +88,6 @@
         const read = "<%=Read%>";
         const ReadArray = read.split(",");
 
-        // .... define chart with data .... //
         const myChart = new Chart(ctx, {
           type: "line",
           data: {
