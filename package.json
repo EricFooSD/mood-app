@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EricFooSD/mood-app.git"
+    "url": "git+https://github.com/EricFooSD/moodfulness.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EricFooSD/mood-app.git/issues"
+    "url": "https://github.com/EricFooSD/moodfulness.git/issues"
   },
-  "homepage": "https://github.com/EricFooSD/mood-app.git#readme",
+  "homepage": "https://github.com/EricFooSD/moodfulness.git#readme",
   "devDependencies": {
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
