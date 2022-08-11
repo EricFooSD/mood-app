@@ -1,10 +1,35 @@
 <html>
   <%- include('header',{title: `Log in`}); -%>
+  <!-- Define icons for alerts-->
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+        />
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+        />
+      </symbol>
+      <symbol
+        id="exclamation-triangle-fill"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+        />
+      </symbol>
+    </svg>
+  </div>
   <h2>Log in into your account</h2>
   <div class="container">
     <div class="row">
       <div class="col-0 col-md-2"></div>
       <div class="col-12 col-md-8">
+        <!-- Tab element for login and sign up -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button
@@ -36,6 +61,7 @@
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
+          <!-- Log in tab -->
           <div
             class="tab-pane fade show active"
             id="home"
@@ -52,48 +78,39 @@
                 <div class="row">
                   <div class="col-md-12 col-12">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="entry"
+                      <!-- Input field with server side validation -->
+                      <input type="text" class="form-control" id="nameInput"
                       name="name" <% if (error==="WRONG_PASSWORD"){%>
-                      value='<%=name%>' <%}%> id="1234"
-                      placeholder="name@example.com" required />
-                      <label for="1234">Name</label>
+                      value='<%=name%>' <%}%> placeholder="name@example.com"
+                      required />
+                      <label for="nameInput">Name</label>
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">Let us know your name.</div>
                     </div>
                   </div>
                   <div class="col-md-12 col-12">
                     <div class="form-floating mb-3">
+                      <!-- Input field with server side validation -->
                       <input type="password" <%if (error==='WRONG_PASSWORD'){ %>
                       class="form-control is-invalid" <% } else{ %>
-                      class="form-control" <%}%> id="entry" name="password"
-                      id="1234" placeholder="name@example.com" required />
-                      <label for="1234">Password</label>
+                      class="form-control" <%}%> id="passwordInput"
+                      name="password" placeholder="Password" required />
+                      <label for="passwordInput">Password</label>
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">
                         We promise to keep it a secret.
                       </div>
                     </div>
                   </div>
+                  <!-- Define alert element for server side validation errors -->
                   <div class="col-md-12 col-12">
                     <%if(error==='WRONG_PASSWORD'){%>
                     <div
                       class="alert alert-danger alert-dismissible fade show"
                       role="alert"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style="display: none"
-                      >
-                        <symbol
-                          id="exclamation-triangle-fill"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                          />
-                        </symbol>
-                      </svg>
                       <svg
                         class="bi flex-shrink-0 me-2"
                         width="24"
@@ -117,20 +134,6 @@
                       role="alert"
                     >
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style="display: none"
-                      >
-                        <symbol
-                          id="info-fill"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
-                          />
-                        </symbol>
-                      </svg>
-                      <svg
                         class="bi flex-shrink-0 me-2"
                         width="24"
                         height="24"
@@ -153,9 +156,42 @@
                 <div class="col-md-3 col-3">
                   <input type="submit" class="btn btn-dark" value="Submit" />
                 </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <div
+                      class="alert alert-warning align-items-center"
+                      role="alert"
+                    >
+                      <h4 class="alert-heading">
+                        <svg
+                          class="bi flex-shrink-0 me-2"
+                          width="24"
+                          height="24"
+                          role="img"
+                          aria-label="Info:"
+                        >
+                          <use xlink:href="#info-fill" />
+                        </svg>
+                        Test Credentials
+                      </h4>
+                      <p>
+                        Hi there! You may create a new account or use the below
+                        test account with seeded data.
+                      </p>
+                      <hr />
+                      <p class="mb-0">
+                        Username: Spiderman <br />
+                        Password: testing <br />
+                        (both are case sensitive)
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
+          <!-- Sign up tab -->
           <div
             class="tab-pane fade"
             id="profile"
@@ -177,7 +213,7 @@
                     <br />
                   </div>
                   <div class="col-md-12 col-12">
-                    <label for="text">Name</label>
+                    <label for="name">Name</label>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -186,12 +222,13 @@
                         name="name"
                         required
                       />
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">Let us know your name.</div>
                     </div>
                   </div>
                   <div class="col-md-12 col-12">
-                    <label for="text">Age</label>
+                    <label for="age">Age</label>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -200,22 +237,26 @@
                         name="age"
                         required
                       />
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">Don't be shy now.</div>
                     </div>
                   </div>
                   <div class="col-md-12 col-12">
-                    <label for="text">Gender</label>
+                    <label for="gender">Gender</label>
                     <select name="gender" class="form-control" required>
                       <option selected disabled value="">Please Select</option>
                       <option value="He">He</option>
                       <option value="She">She</option>
                       <option value="Non-binary">Non-binary</option>
                     </select>
+                    <!-- Client side validation if input is empty -->
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please select an option.</div>
                     <br />
                   </div>
                   <div class="col-md-12 col-12">
-                    <label for="text">Password</label>
+                    <label for="password">Password</label>
                     <div class="input-group mb-3">
                       <input
                         type="password"
@@ -224,6 +265,7 @@
                         name="password"
                         required
                       />
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">
                         We promise to keep it a secret.
@@ -231,7 +273,7 @@
                     </div>
                   </div>
                   <div class="col-md-12 col-12">
-                    <label for="text">Profile Picture</label>
+                    <label for="profilePhoto">Profile Picture</label>
                     <div class="input-group mb-3">
                       <input
                         type="file"
@@ -240,6 +282,7 @@
                         name="photo"
                         required
                       />
+                      <!-- Client side validation if input is empty -->
                       <div class="valid-feedback">Looks good!</div>
                       <div class="invalid-feedback">Come on now.</div>
                     </div>
