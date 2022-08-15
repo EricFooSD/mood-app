@@ -240,7 +240,6 @@ const statusPage = (request, response) => {
                         break; }
                     }
                   }
-                  console.log('data', data);
                   response.render('status', data);
                 });
             });
@@ -331,7 +330,6 @@ const chartPage = (request, response) => {
 
   // set parameter for sort date
   const selectedSort = request.query.sortby;
-  console.log('sort by: ', request.query.sortby);
 
   let startDate;
 
@@ -385,7 +383,6 @@ const chartPage = (request, response) => {
             .then((result3) => {
               // for each activity type, add the corresponding mood rating scores
               result3.rows.forEach((element) => {
-                console.log('element.name', element.name);
                 data[`${element.name}`] = [0, 0, 0, 0, 0, 0, 0];
 
                 for (let j = 0; j < data.labels.length; j += 1) {
@@ -396,7 +393,6 @@ const chartPage = (request, response) => {
                   }
                 }
               });
-              console.log('data', data);
               response.render('chart', data);
             });
         });
