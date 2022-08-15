@@ -6,5 +6,5 @@
 
 ## Database ERD
 
-[View ERD] (https://drive.google.com/file/d/1cTnziqYRYkNARFd1KVk-AHq9P61VMM5e/view?usp=sharing)
+[View ERD](https://drive.google.com/file/d/1cTnziqYRYkNARFd1KVk-AHq9P61VMM5e/view?usp=sharing)
 
