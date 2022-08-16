@@ -1,4 +1,4 @@
-# Moodfulness
+# Moodfulness :smiley: :confused:
 
 Moodfulness is an app that allows the user to track their mental and physical activities like running, swiming, and meditating. When a user tracks their activity, they are also able to indicate how they felt at the moment in time. Was it a stressful day? Or maybe the user was feeling calm.
 
