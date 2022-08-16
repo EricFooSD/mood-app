@@ -4,7 +4,7 @@ Moodfulness is an app that allows the user to track their mental and physical ac
 
 Deployed: https://moodfulness.herokuapp.com/
 
-Stack used: Bootstrap, Chart.js, EJS, Express, PostgreSQL
+Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
 
 ## Features
 
