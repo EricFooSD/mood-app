@@ -78,7 +78,11 @@ const PORT = process.env.PORT || 3004;
 
 const SALT = 'Eric testing the Hash';
 
-// .... function to hash a string .... //
+/**
+ * @desc function to hash a string
+ * @param {string} input text to be hashed
+ * @returns hashed string
+ */
 const getHash = (input) => {
   // create new SHA object
   const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
@@ -110,7 +114,10 @@ app.use((request, response, next) => {
   next();
 });
 
-// .... function to be used to check user credentials before allowing other CRUD calls .... //
+/**
+ * @desc middleware to check user credentials before alloing next CRUD calls
+ * @returns if check passed, proceed to next call, if check fails redirect to login page
+ */
 const restrictToLoggedIn = (request, response, next) => {
   // is the user logged in? Use the other middleware.
   if (request.isUserLoggedIn === false) {
@@ -141,9 +148,18 @@ const restrictToLoggedIn = (request, response, next) => {
 // Helper Functions
 // .....................................
 
+/**
+ * @desc generates a random whole number from 0
+ * @param {number} max The maximum possible number to be generated
+ */
 const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-// .... function to get user info like name, profile picture .... //
+/**
+ * @desc function to get user details for each page load
+ * @param cookies browser cookies
+ * @param {Object} data local variable in each get page call
+ * @returns update data local variable with user data
+ */
 const getUserInfo = (cookies, data) => {
   console.log('get: userInfo');
   const { userID } = cookies;
@@ -166,7 +182,10 @@ const getUserInfo = (cookies, data) => {
 // GET functions
 // .....................................
 
-// .... get homepage .... //
+/**
+ * @desc function to load / get home page
+ * @returns renders home EJS with data from DB
+ */
 const homePage = (request, response) => {
   console.log('get: homepage');
   const data = {};
@@ -183,7 +202,10 @@ const homePage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... get status / your activities page .... //
+/**
+ * @desc function to load / get status page
+ * @returns renders status EJS with data from DB
+ */
 const statusPage = (request, response) => {
   console.log('get: status page');
   const data = {};
@@ -248,7 +270,10 @@ const statusPage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... get page to log physical activity .... //
+/**
+ * @desc function to load / get body page
+ * @returns renders body EJS with data from DB
+ */
 const bodyPage = (request, response) => {
   console.log('get: log body page');
   const data = {};
@@ -276,7 +301,10 @@ const bodyPage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... get page to log mental activity .... //
+/**
+ * @desc function to load / get mind page
+ * @returns renders mind EJS with data from DB
+ */
 const mindPage = (request, response) => {
   console.log('get: log mind page');
   const data = {};
@@ -304,7 +332,10 @@ const mindPage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... get login page .... //
+/**
+ * @desc function to load / get login page
+ * @returns renders login EJS with data from DB
+ */
 const logInPage = (request, response) => {
   console.log('get: login page');
   const data = {};
@@ -319,7 +350,10 @@ const logInPage = (request, response) => {
   response.render('login', data);
 };
 
-// .... get chart page .... //
+/**
+ * @desc function to load / get chart page
+ * @returns renders chart EJS with data from DB
+ */
 const chartPage = (request, response) => {
   console.log('get: chart');
   const data = {};
@@ -400,7 +434,10 @@ const chartPage = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... get user profile page .... //
+/**
+ * @desc function to load / get profile page
+ * @returns renders profile EJS with data from DB
+ */
 const profilePage = (request, response) => {
   console.log('get: profile page');
   const data = {};
@@ -423,7 +460,11 @@ const profilePage = (request, response) => {
 // POST functions
 // .....................................
 
-// .... posting a new activity entry into DB .... //
+/**
+ * @desc function to post new activity entry
+ * @param request HTTP request
+ * @returns post entry into DB and redirects to status page route
+ */
 const logEntry = (request, response) => {
   console.log('post: new entry submitted');
 
@@ -454,7 +495,11 @@ const logEntry = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... deleting activity in DB .... //
+/**
+ * @desc function to delete existing activity entry
+ * @param request HTTP request
+ * @returns post entry into DB and redirects to status page route
+ */
 const deleteEntry = (request, response) => {
   console.log('delete: remove entry');
   const selectedNote = request.params.id;
@@ -468,7 +513,11 @@ const deleteEntry = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... edit activity in DB .... //
+/**
+ * @desc function to edit existing activity entry
+ * @param request HTTP request
+ * @returns edit entry in DB and redirects to status page route
+ */
 const editEntry = (request, response) => {
   const selectedNote = request.params.id;
   const edit = request.body;
@@ -494,7 +543,11 @@ const editEntry = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... create a new user .... //
+/**
+ * @desc function to create a new user account
+ * @param request HTTP request
+ * @returns post entry into DB and redirects to login page route
+ */
 const createUser = (request, response) => {
   const data = {};
   getUserInfo(request.cookies, data);
@@ -515,7 +568,11 @@ const createUser = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... attempt login .... //
+/**
+ * @desc function to verify users login information
+ * @param request HTTP request
+ * @returns if passed redirect to status page route, if failed redirect to login page route with validation error message
+ */
 const logIn = (request, response) => {
   console.log('login attempted');
   const data = {};
@@ -557,7 +614,11 @@ const logIn = (request, response) => {
     .catch((error) => console.log(error.stack));
 };
 
-// .... log out .... //
+/**
+ * @desc function to log out of user account
+ * @param request HTTP request
+ * @returns clears browswer cookies
+ */
 const signOut = (request, response) => {
   console.log('signout');
   response.clearCookie('userID');
@@ -565,7 +626,11 @@ const signOut = (request, response) => {
   response.redirect('/login');
 };
 
-// .... editting profile .... //
+/**
+ * @desc function to edit user profile information
+ * @param request HTTP request
+ * @returns edits DB and redirects to profile page route
+ */
 const editProfile = (request, response) => {
   const edit = request.body;
   console.log('edit user profile');
@@ -589,7 +654,7 @@ const editProfile = (request, response) => {
 // Routes
 // .....................................
 
-// get
+// .... GET ROUTES .... //
 app.get('/', homePage);
 app.get('/status', restrictToLoggedIn, statusPage);
 app.get('/body', restrictToLoggedIn, bodyPage);
@@ -599,14 +664,14 @@ app.get('/signout', restrictToLoggedIn, signOut);
 app.get('/profile', restrictToLoggedIn, profilePage);
 app.get('/chart', restrictToLoggedIn, chartPage);
 
-// post
+// .... POST ROUTES .... //
 app.post('/logEntry', restrictToLoggedIn, logEntry);
 app.post('/edit/:id', restrictToLoggedIn, editEntry);
 app.post('/editProfile', restrictToLoggedIn, multerUpload.single('photo'), editProfile);
 app.post('/createAccount', multerUpload.single('photo'), createUser);
 app.post('/logIn', logIn);
 
-// delete
+// .... DELETE ROUTES .... //
 app.delete('/delete/:id', restrictToLoggedIn, deleteEntry);
 
 app.listen(PORT);
