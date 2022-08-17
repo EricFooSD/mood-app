@@ -31,5 +31,3 @@ Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
 ## Database ERD
 
 [View ERD](https://drive.google.com/file/d/1cTnziqYRYkNARFd1KVk-AHq9P61VMM5e/view?usp=sharing)
-
-# Eric's mood-app
