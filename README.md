@@ -17,21 +17,21 @@ To try the app, you may sign up as a new user or use below test credentials with
 
 ## Features
 
-:ballot_box_with_check: Create user via sign up form
+:heavy_check_mark: Create user via sign up form
 
-:ballot_box_with_check: Login into account
+:heavy_check_mark: Login into account
 
-:ballot_box_with_check: Log an activity
+:heavy_check_mark: Log an activity
 
-:ballot_box_with_check: Edit an activity
+:heavy_check_mark: Edit an activity
 
-:ballot_box_with_check: Delete an activity
+:heavy_check_mark: Delete an activity
 
-:ballot_box_with_check: View list of activities in a table
+:heavy_check_mark: View list of activities in a table
 
-:ballot_box_with_check: Filter table to display activities for the selected date
+:heavy_check_mark: Filter table to display activities for the selected date
 
-:ballot_box_with_check: View a 7 day chart of activities and mood rating
+:heavy_check_mark: View a 7 day chart of activities and mood rating
 
 ## Wireframes / Mocks
 
