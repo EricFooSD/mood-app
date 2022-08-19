@@ -15,6 +15,8 @@ To try the app, you may sign up as a new user or use below test credentials with
 
 <sub>both case sensitive</sub>
 
+![Moodfulness](https://user-images.githubusercontent.com/86565793/185615307-889e4934-7fdb-4cee-9389-4c796d8d4288.png)
+
 ## Features
 
 :heavy_check_mark: Create user via sign up form
