@@ -2,9 +2,16 @@
 
 Moodfulness is an app that allows the user to track their mental and physical activities like running, swiming, and meditating. When a user tracks their activity, they are also able to indicate how they felt at the moment in time. Was it a stressful day? Or maybe the user was feeling calm.
 
+Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
+
 Deployed: https://moodfulness.herokuapp.com/
 
-Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
+To try the app, you may sign up as a new user or use below test credentials
+
+| Username | Spiderman |
+| Password | testing |
+<sub>both case sensitive</sub>
+
 
 ## Features
 
