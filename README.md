@@ -8,6 +8,8 @@ Deployed: https://moodfulness.herokuapp.com/
 
 To try the app, you may sign up as a new user or use below test credentials
 
+| Test Credentials |  |
+| ------------- | ------------- |
 | Username | Spiderman |
 | Password | testing |
 <sub>both case sensitive</sub>
