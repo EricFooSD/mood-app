@@ -15,9 +15,6 @@ To try the app, you may sign up as a new user or use below test credentials with
 
 <sub>both case sensitive</sub>
 
-![Moodfulness](https://user-images.githubusercontent.com/86565793/185615501-90972333-993f-4680-a4d6-3d2ee80deef0.png)
-![Screenshot 2022-08-19 at 8 15 17 PM](https://user-images.githubusercontent.com/86565793/185616375-df3af6ee-1fe6-41eb-9ace-7b7eeb8b7070.png)
-
 ## Features
 
 :heavy_check_mark: Create user via sign up form
@@ -43,3 +40,7 @@ To try the app, you may sign up as a new user or use below test credentials with
 ## Database ERD
 
 [View ERD](https://drive.google.com/file/d/1cTnziqYRYkNARFd1KVk-AHq9P61VMM5e/view?usp=sharing)
+
+## Showcase
+![Moodfulness](https://user-images.githubusercontent.com/86565793/185615501-90972333-993f-4680-a4d6-3d2ee80deef0.png)
+![Screenshot 2022-08-19 at 8 15 17 PM](https://user-images.githubusercontent.com/86565793/185616375-df3af6ee-1fe6-41eb-9ace-7b7eeb8b7070.png)
