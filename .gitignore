@@ -8,4 +8,4 @@ node_modules/
 uploads/*
 
 # File uploads
-setupfiles/post-mortem.pages
+setupfiles/*

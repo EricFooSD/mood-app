@@ -4,14 +4,14 @@ Moodfulness is an app that allows the user to track their mental and physical ac
 
 Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
 
-Deployed: https://moodfulness.herokuapp.com/
+Deployed:
 
 To try the app, you may sign up as a new user or use below test credentials with seeded data
 
-| Test Credentials |  |
-| ------------- | ------------- |
-| Username | Spiderman |
-| Password | testing |
+| Test Credentials |           |
+| ---------------- | --------- |
+| Username         | Spiderman |
+| Password         | testing   |
 
 <sub>both case sensitive</sub>
 
@@ -42,5 +42,6 @@ To try the app, you may sign up as a new user or use below test credentials with
 [View ERD](https://drive.google.com/file/d/1cTnziqYRYkNARFd1KVk-AHq9P61VMM5e/view?usp=sharing)
 
 ## Showcase
+
 ![Moodfulness](https://user-images.githubusercontent.com/86565793/185615501-90972333-993f-4680-a4d6-3d2ee80deef0.png)
 ![Screenshot 2022-08-19 at 8 15 17 PM](https://user-images.githubusercontent.com/86565793/185616375-df3af6ee-1fe6-41eb-9ace-7b7eeb8b7070.png)
