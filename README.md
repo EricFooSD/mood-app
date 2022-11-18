@@ -6,6 +6,8 @@ Stack: Bootstrap, Chart.js, EJS, Express, PostgreSQL
 
 Deployed:
 
+Video Demo Link: https://www.youtube.com/watch?v=rK95FIoik7E
+
 To try the app, you may sign up as a new user or use below test credentials with seeded data
 
 | Test Credentials |           |
