@@ -46,4 +46,5 @@ To try the app, you may sign up as a new user or use below test credentials with
 ## Showcase
 
 ![Moodfulness](https://user-images.githubusercontent.com/86565793/185615501-90972333-993f-4680-a4d6-3d2ee80deef0.png)
-![Screenshot 2022-08-19 at 8 15 17 PM](https://user-images.githubusercontent.com/86565793/185616375-df3af6ee-1fe6-41eb-9ace-7b7eeb8b7070.png)
+![Screenshot 2022-08-19 at 8 15 17 PM](https://user-images.githubusercontent.com/86565793/185616375-df3af6ee-1fe6-41eb-9ace-7b7eeb8b7070.png)<img width="197" alt="Screenshot 2023-07-24 at 6 18 52 PM" src="https://github.com/EricFooSD/moodfulness/assets/86565793/f081b1ec-0d7f-4e7e-a391-bc4c607e6eee">
+
