@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable max-len */
@@ -259,7 +261,8 @@ const statusPage = (request, response) => {
                       if (data.activity[j].id === result4.rows[i].activity_id) {
                         data.activity[j].moodNames += `${result4.rows[i].name} `;
                         data.activity[j].mood.push(result4.rows[i]);
-                        break; }
+                        break;
+                      }
                     }
                   }
                   response.render('status', data);
@@ -406,7 +409,8 @@ const chartPage = (request, response) => {
           result2.rows.forEach((element) => {
             // iterate through activities and add the combined mood rating scores
             for (let j = 0; j < data.activity.length; j += 1) {
-              if (element.activity_id === data.activity[j].id) { data.activity[j].score += element.rating;
+              if (element.activity_id === data.activity[j].id) {
+                data.activity[j].score += element.rating;
                 break;
               }
             }
@@ -477,11 +481,12 @@ const logEntry = (request, response) => {
     .query('INSERT INTO activity (user_id, date, activity_type, free_text) VALUES ($1,$2,$3,$4) RETURNING id', inputLog)
     .then((result) => {
       const { id } = result.rows[0];
-      if (Array.isArray(log.mood_id))
-      { log.mood_id.forEach((element) => {
-        addQuery += `(${id},${element}),`;
-      });
-      addQuery = addQuery.slice(0, -1); }
+      if (Array.isArray(log.mood_id)) {
+        log.mood_id.forEach((element) => {
+          addQuery += `(${id},${element}),`;
+        });
+        addQuery = addQuery.slice(0, -1);
+      }
       else {
         addQuery = `(${id},${log.mood_id})`;
       }
@@ -527,7 +532,8 @@ const editEntry = (request, response) => {
     edit.mood_id.forEach((element) => {
       addQuery += `(${selectedNote},${element}),`;
     });
-    addQuery = addQuery.slice(0, -1); }
+    addQuery = addQuery.slice(0, -1);
+  }
   // if only 1 mood selected, addQuery will just be 1 entry
   else {
     addQuery = `(${selectedNote},${edit.mood_id})`;
@@ -557,7 +563,7 @@ const createUser = (request, response) => {
   shaObj.update(request.body.password);
   const hashedPassword = shaObj.getHash('HEX');
 
-  const values = [request.body.name, request.body.age, request.body.gender, request.body.password, hashedPassword, request.file.key];
+  const values = [request.body.name, request.body.age, request.body.gender, request.body.password, hashedPassword, 'batman.png'];
   const sqlQuery = 'INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ($1,$2,$3,$4,$5,$6)';
   client
     .query(sqlQuery, values)
@@ -640,7 +646,7 @@ const editProfile = (request, response) => {
   shaObj.update(edit.password);
   const hashedPassword = shaObj.getHash('HEX');
 
-  const sqlQuery = `UPDATE users SET name='${edit.name}', age='${edit.age}', gender='${edit.gender}', password='${edit.password}', hashed_password='${hashedPassword}', photo='${request.file.key}' WHERE id=${edit.id}`;
+  const sqlQuery = `UPDATE users SET name='${edit.name}', age='${edit.age}', gender='${edit.gender}', password='${edit.password}', hashed_password='${hashedPassword}' WHERE id=${edit.id}`;
   client
     .query(sqlQuery)
     .then((result) => {
