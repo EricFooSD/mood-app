@@ -1,6 +1,7 @@
 <html>
-  <%- include('header',{title: `Profile`}); -%>
-  <h1>Hello, <%= profile.name %></h1>
+<%- include('header',{title: `Profile`}); -%>
+  <h1>Hello, <%= profile.name %>
+  </h1>
   <div class="container">
     <div class="row">
       <div class="col-0 col-md-2"></div>
@@ -8,62 +9,34 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12 col-12">
-              <img
-                src="https://moodbucket.s3.ap-southeast-1.amazonaws.com/<%= profile.photo %>"
-                class="rounded-circle img-thumbnail mx-auto d-block"
-                style="width: 100px"
-              />
+              <img src="/images/<%= profile.photo %>" class="rounded-circle img-thumbnail mx-auto d-block"
+                style="width: 100px" />
               <br />
             </div>
             <div class="col-md-12 col-12">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Name</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Username"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  value="<%= profile.name%>"
-                  disabled
-                />
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1" value="<%= profile.name%>" disabled />
               </div>
             </div>
             <div class="col-md-12 col-12">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Age</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Username"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  value="<%= profile.age%>"
-                  disabled
-                />
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1" value="<%= profile.age%>" disabled />
               </div>
             </div>
             <div class="col-md-12 col-12">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Gender</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Username"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  value="<%= profile.gender%>"
-                  disabled
-                />
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1" value="<%= profile.gender%>" disabled />
               </div>
             </div>
           </div>
           <div class="row">
-            <div
-              class="col-md-3 col-3"
-              data-bs-toggle="modal"
-              data-bs-target="#backdrop"
-            >
+            <div class="col-md-3 col-3" data-bs-toggle="modal" data-bs-target="#backdrop">
               <input type="button" class="btn btn-dark" value="Edit" />
             </div>
           </div>
@@ -74,33 +47,14 @@
   </div>
   <!-- Define modal to be opened when user wants to edit user profile -->
   <!-- Modal -->
-  <div
-    class="modal fade"
-    clear
-    id="backdrop"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <form
-      action="/editProfile"
-      class="needs-validation"
-      novalidate
-      method="POST"
-      enctype="multipart/form-data"
-    >
+  <div class="modal fade" clear id="backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form action="/editProfile" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="container">
@@ -108,41 +62,21 @@
                 <div class="col-md-12 col-12">
                   <label for="text">Name</label>
                   <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="entry"
-                      name="name"
-                      value="<%= profile.name%>"
-                      required
-                    />
+                    <input type="text" class="form-control" id="entry" name="name" value="<%= profile.name%>"
+                      required />
                     <div class="invalid-tooltip">Let us know your name.</div>
                   </div>
                 </div>
                 <div class="col-12">
                   <label for="type">ID</label>
                   <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      id="entry"
-                      readonly
-                      class="form-control"
-                      name="id"
-                      value="<%= profile.id %>"
-                    />
+                    <input type="text" id="entry" readonly class="form-control" name="id" value="<%= profile.id %>" />
                   </div>
                 </div>
                 <div class="col-md-12 col-12">
                   <label for="text">Age</label>
                   <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="entry"
-                      name="age"
-                      value="<%= profile.age%>"
-                      required
-                    />
+                    <input type="text" class="form-control" id="entry" name="age" value="<%= profile.age%>" required />
                     <div class="invalid-tooltip">Don't be shy now.</div>
                   </div>
                 </div>
@@ -159,41 +93,17 @@
                 <div class="col-md-12 col-12">
                   <label for="text">Password</label>
                   <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="entry"
-                      name="password"
-                      required
-                    />
+                    <input type="text" class="form-control" id="entry" name="password" required />
                     <div class="invalid-tooltip">
                       We promise to keep it a secret.
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-12">
-                  <label for="text">Profile Picture</label>
-                  <div class="input-group mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="entry"
-                      name="photo"
-                      value="<%= profile.photo%>"
-                      required
-                    />
-                    <div class="invalid-tooltip">Come on now.</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
             <button type="submit" class="btn btn-success">Submit</button>
@@ -204,4 +114,5 @@
   </div>
   <!-- Modal END -->
   <%- include('footer'); -%>
+
 </html>
