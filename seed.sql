@@ -1,7 +1,7 @@
 
 --Users --
-INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ('Spiderman', 20, 'He', 'testing', '521b9ccefbcd14d179e7a1bb877752870a6d620938b28a66a107eac6e6805b9d0989f45b5730508041aa5e710847d439ea74cd312c9355f1f2dae08d40e41d50','ee967905c590ab91fef858062e996a8f');
-INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ('Groot', 2, 'Non-binary', 'testing', '521b9ccefbcd14d179e7a1bb877752870a6d620938b28a66a107eac6e6805b9d0989f45b5730508041aa5e710847d439ea74cd312c9355f1f2dae08d40e41d50','2b2d686e7f414b9f9ca2c29453b759ec');
+INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ('Spiderman', 20, 'He', 'testing', '521b9ccefbcd14d179e7a1bb877752870a6d620938b28a66a107eac6e6805b9d0989f45b5730508041aa5e710847d439ea74cd312c9355f1f2dae08d40e41d50','spiderman.png');
+INSERT INTO users (name, age, gender, password, hashed_password, photo) VALUES ('Groot', 2, 'Non-binary', 'testing', '521b9ccefbcd14d179e7a1bb877752870a6d620938b28a66a107eac6e6805b9d0989f45b5730508041aa5e710847d439ea74cd312c9355f1f2dae08d40e41d50','groot.png');
 
 
 -- Activity Type. 1 is physical, 2 is mental --
@@ -42,16 +42,16 @@ INSERT INTO quotes (quote, type) VALUES ('Just when the caterpillar thought the 
 
 -- Activity --
 
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-01-04', 1, 'Went for swim after a long day of work.');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-01-08', 8, 'Reading Harry Potter');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-01-08', 4, 'Did yoga with friends');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-01-10', 3, 'Cycle 50km');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-01-10', 5, 'Reflecting on the day');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-01-08', 2, 'Run baby run');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-01-08', 7, 'Outdoor walk');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-01-06', 4, 'Yoga movement 5pm');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-01-10', 1, 'Swimming like a fish');
-INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-01-10', 5, 'Reflecting on the day');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-10-04', 1, 'Went for swim after a long day of work.');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-10-08', 8, 'Reading Harry Potter');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-10-08', 4, 'Did yoga with friends');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-10-06', 3, 'Cycle 50km');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (1, '2022-10-07', 5, 'Reflecting on the day');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-10-08', 2, 'Run baby run');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-10-08', 7, 'Outdoor walk');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-10-06', 4, 'Yoga movement 5pm');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-10-07', 1, 'Swimming like a fish');
+INSERT INTO activity (user_id, date, activity_type, free_text) VALUES (2, '2022-10-09', 5, 'Reflecting on the day');
 
 
 -- Activity_mood --
