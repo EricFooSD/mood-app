@@ -69,6 +69,8 @@ if (process.env.DATABASE_URL) {
   };
 }
 
+// comment to push changes in DB
+
 const client = new Client(pgConnectionConfigs);
 client.connect();
 
